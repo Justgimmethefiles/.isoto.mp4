@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-OS FFmpeg ISO Glitch Art Guide</title>
+    <style>
+        :root {
+            --yellow: #FFE600;
+            --white: #FFFFFF;
+            --black: #000000;
+            --gray-dark: #1A1A1A;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--black);
+            color: var(--white);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 4px solid var(--white);
+            padding: 30px;
+            background-color: var(--black);
+            box-shadow: 10px 10px 0px var(--yellow);
+        }
+
+        h1 {
+            color: var(--black);
+            background-color: var(--yellow);
+            padding: 15px;
+            text-align: center;
+            border: 3px solid var(--white);
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: var(--yellow);
+            border-bottom: 3px dashed var(--white);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            color: var(--white);
+            border-left: 4px solid var(--yellow);
+            padding-left: 10px;
+            margin-top: 25px;
+        }
+
+        p {
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        .note-box {
+            background-color: var(--white);
+            color: var(--black);
+            border: 3px solid var(--yellow);
+            padding: 15px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .alert-box {
+            background-color: var(--yellow);
+            color: var(--black);
+            border: 3px solid var(--white);
+            padding: 12px;
+            margin: 10px 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .code-container {
+            position: relative;
+            background-color: var(--gray-dark);
+            border: 2px solid var(--yellow);
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            color: var(--yellow);
+            font-size: 1rem;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--yellow);
+            color: var(--black);
+            border: 2px solid var(--white);
+            padding: 6px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--white);
+            color: var(--black);
+            border-color: var(--yellow);
+        }
+
+        .copy-btn.copied {
+            background-color: #00FF66;
+            color: var(--black);
+            border-color: var(--black);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>ISO to Glitch Media: Multi-OS Cross-Platform Guide</h1>
+
+    <p>This handbook walks you through installing and executing raw binary data extractions via <strong>FFmpeg</strong> on Linux, Windows, and macOS architectures.</p>
+
+    <div class="alert-box">
+        ⚠️ CRITICAL ATTENTION REQUIRED: Before executing any processing blocks below, you must manually change the capitalised placeholders (e.g., YOUR_ISO_FILE.iso) inside the command text to match your actual system filenames.
+    </div>
+
+    <h2>PART 1: SYSTEM INSTALLATION METHODS</h2>
+    <p>Locate the specific package manager or utility configuration block built for your respective terminal shell environment:</p>
+
+    <h2>[LINUX SYSTEMS]</h2>
+
+    <h3>Ubuntu / Debian / Linux Mint / Pop!_OS</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>sudo apt update && sudo apt install ffmpeg -y</pre>
+    </div>
+
+    <h3>Arch Linux / Manjaro / CachyOS</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>sudo pacman -S ffmpeg --noconfirm</pre>
+    </div>
+
+    <h3>Fedora</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>sudo dnf install ffmpeg -y</pre>
+    </div>
+
+    <h3>RHEL / Rocky Linux / CentOS</h3>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>sudo dnf install epel-release -y && sudo dnf config-manager --set-enabled crb && sudo dnf install https://rpmfusion.org(rpm -E %rhel).noarch.rpm -y && sudo dnf install ffmpeg -y</pre>
+    </div>
+
+    <h2>[WINDOWS SYSTEMS]</h2>
+
+    <h3>Windows 11 / Windows 10 (Modern PowerShell / Command Prompt)</h3>
+    <p>Modern Windows distributions feature a built-in repository system called winget. Run this in an Administrator window:</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>winget install Gyan.FFmpeg</pre>
+    </div>
+
+    <h3>Windows 7 / Windows 8 / Server Environments (Legacy Manual Setup)</h3>
+    <p>Legacy environments require installing the Chocolatey package engine or manually routing system variable environment paths:</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org'))</pre>
+    </div>
+    <p>Once Chocolatey initializes inside your legacy terminal shell environment, install the codec binary stream package:</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>choco install ffmpeg -y</pre>
+    </div>
+
+    <h2>[APPLE MACOS SYSTEMS]</h2>
+
+    <h3>All Modern macOS Flavors (Apple Silicon M1/M2/M3 & Intel Base architectures)</h3>
+    <p>First, set up the Homebrew framework package runner inside your system environment wrapper core:</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>/bin/bash -c "$(curl -fsSL https://githubusercontent.com)"</pre>
+    </div>
+    <p>Once Homebrew setup structures sync successfully with your local directory architecture, fetch the global codec binary suite:</p>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>brew install ffmpeg</pre>
+    </div>
+
+    <h2>PART 2: DATA TRANSCODING EXTRACTION PIPELINES</h2>
+    <p>Command layout structures can change depending on how your operating system shell handles raw mathematics parameters:</p>
+
+    <h3>1. Transcode ISO to Raw Video (Universal Command across ALL platforms)</h3>
+    <div class="alert-box">⚠️ Remember to replace: YOUR_ISO_FILE.iso and NAME_THIS_MP4.mp4</div>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>ffmpeg -f rawvideo -pixel_format rgb24 -video_size 1920x1080 -framerate 60 -i YOUR_ISO_FILE.iso -c:v libx264 -pix_fmt yuv420p NAME_THIS_MP4.mp4</pre>
+    </div>
+
+    <h3>2. Transcode ISO to Full Raw Sound File (Universal Command across ALL platforms)</h3>
+    <div class="alert-box">⚠️ Remember to replace: YOUR_ISO_FILE.iso and NAME_THIS_MP3.mp3</div>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>ffmpeg -f u8 -ar 44100 -ac 2 -i YOUR_ISO_FILE.iso -c:a libmp3lame -q:a 2 NAME_THIS_MP3.mp3</pre>
+    </div>
+
+    <h3>3. Hyper-Speed Audio Pitch Scaling</h3>
+    <p>The speed ratio multiplier uses a specialized math string parser inside the audio filter argument. Select the syntax mapped to your OS shell host:</p>
+
+    <h4>Linux Bash/Zsh & macOS Zsh (All Versions)</h4>
+    <div class="alert-box">⚠️ Remember to replace: NAME_THIS_MP3.mp3 and NAME_THIS_HYPERSPEED_MP3.mp3</div>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <h3>4. Multiplex Final Synced Master Track (Universal Command across ALL platforms)</h3>
+    <div class="alert-box">⚠️ Remember to replace: NAME_THIS_MP4.mp4, NAME_THIS_HYPERSPEED_MP3.mp3, and NAME_THIS_FINAL_GLITCH_VIDEO.mp4</div>
+    <div class="code-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>ffmpeg -i NAME_THIS_MP4.mp4 -i NAME_THIS_HYPERSPEED_MP3.mp3 -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 NAME_THIS_FINAL_GLITCH_VIDEO.mp4</pre>
+    </div>
+
+    <div class="note-box">
+        CROSS-PLATFORM ARCHITECTURE NOTE: Warnings regarding "packet sizes", "truncation", or "corrupt data frames" encountered inside your terminal shell window during termination states are normal behaviors as the software exits non-standard binary archives.
+    </div>
+</div> <!-- Closes .container -->
+
+<script>
+    function copyCode(button) {
+        const preElement = button.nextElementSibling;
+        const textToCopy = preElement.textContent;
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            button.textContent = "Copied!";
+            button.classList.add("copied");
+
+            setTimeout(() => {
+                button.textContent = "Copy";
+                button.classList.remove("copied");
+            }, 2000);
+        }).catch(err => {
+            console.error("Failed to copy text matrix: ", err);
+        });
+    }
+</script>
+
+</body>
+</html>
